@@ -18,12 +18,15 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal
         {
             Ok = false;
             Fade = false;
+            Size = ElementSize.Auto;
+            Scrollable = true;
+            Centered = false;
         }
 
-        /// <summary>
-        /// Id of the element (probably useless)
-        /// </summary>
-        public string Id { get; set; }
+        ///// <summary>
+        ///// Id of the element (probably useless)
+        ///// </summary>
+        //public string Id { get; set; }
 
         /// <summary>
         /// Whether to add an OK button
@@ -36,6 +39,21 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal
         public bool Fade { get; set; }
 
         /// <summary>
+        /// Whether the modal should be centered in the screen
+        /// </summary>
+        public bool Centered { get; set; }
+
+        /// <summary>
+        /// Whether the modal should include a scrollbar
+        /// </summary>
+        public bool Scrollable { get; set; }
+
+        /// <summary>
+        /// Desired size of the modal
+        /// </summary>
+        public ElementSize Size { get; set; }
+
+        /// <summary>
         /// Internal HTML factory 
         /// </summary>
         /// <param name="context">Custom markup tree</param>
@@ -46,9 +64,12 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal
             // Create the context for child elements
             var modalContext = new ModalContext
             {
-                Id = Id, //output.Attributes["id"].Value.ToString(),
+                Id = output.Attributes["id"]?.Value.ToString(),
                 OkButton = Ok,
-                Fade = Fade
+                Fade = Fade,
+                Centered = Centered,
+                Scrollable = Scrollable,
+                Size = Size
             };
             context.Items[typeof(ModalContext)] = modalContext;
 
@@ -56,10 +77,10 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal
             output.TagName = "div";
             if (output.Attributes.ContainsName("id"))
                 output.Attributes.Remove(context.AllAttributes["id"]);
-            if (output.Attributes.ContainsName("ok"))
-                output.Attributes.Remove(context.AllAttributes["ok"]);
-            if (output.Attributes.ContainsName("fade"))
-                output.Attributes.Remove(context.AllAttributes["fade"]);
+            //if (output.Attributes.ContainsName("ok"))
+            //    output.Attributes.Remove(context.AllAttributes["ok"]);
+            //if (output.Attributes.ContainsName("fade"))
+            //    output.Attributes.Remove(context.AllAttributes["fade"]);
         }
     }
 }

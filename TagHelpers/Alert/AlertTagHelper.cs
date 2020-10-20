@@ -7,7 +7,6 @@
 //
 
 
-using System;
 using System.Threading.Tasks;
 using Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Common;
 using Expoware.Youbiquitous.Core.Extensions;
@@ -98,7 +97,6 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Alert
                 ? $"this.style.display = 'none';"
                 : "";
             
-
             // Write out
             output.TagName = "div";
             output.Attributes.SetAttribute("class", $"alert {alertTypeClass} {dismissible} {fade} {paddingStyle} {css}".TrimEnd());

@@ -8,6 +8,7 @@
 
 using System;
 using System.Threading.Tasks;
+using Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Common;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal
@@ -34,14 +35,21 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal
                 throw new ArgumentException();
 
             // Prepare output
-            var modalCss = $"modal {(modalContext.Fade ?"fade" :"")}";
+            var globalModalCss = $"modal {(modalContext.Fade ?"fade" :"")}";
             output.Attributes.SetAttribute("id", modalContext.Id);
-            output.Attributes.SetAttribute("class", modalCss);
+            output.Attributes.SetAttribute("class", globalModalCss);
             output.Attributes.SetAttribute("tabindex", "-1");
             output.Attributes.SetAttribute("role", "dialog");
             output.Attributes.SetAttribute("aria-labelledby", $"{modalContext.Id}-header");
             output.Attributes.SetAttribute("aria-hidden", "true");
-            output.Content.AppendHtml("<div class='modal-dialog' role='document'><div class='modal-content'>");
+
+            var centered = modalContext.Centered ?"modal-dialog-centered" :"";
+            var scrollable = modalContext.Scrollable ? "modal-dialog-scrollable" : "";
+            var size = modalContext.Size == ElementSize.Auto ?"" : $"modal-{BootstrapUtils.SizeFrom(modalContext.Size)}";
+
+            // Additional modal styles
+            var extraModalCss = $"{centered} {scrollable} {size}".Trim();
+            output.Content.AppendHtml($"<div class='modal-dialog {extraModalCss}' role='document'><div class='modal-content'>");
             output.Content.AppendHtml(body);
             output.Content.AppendHtml("</div></div>");
         }

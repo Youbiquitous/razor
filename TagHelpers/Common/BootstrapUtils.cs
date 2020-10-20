@@ -6,6 +6,8 @@
 // Author: Dino Esposito (http://youbiquitous.net)
 //
 
+using Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal;
+
 namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Common
 {
     /// <summary>
@@ -54,6 +56,21 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Common
                     return "warning";
                 case ElementStatus.InProgress:
                     return "primary-outline";
+                default:
+                    return "";
+            }
+        }
+
+        public static string SizeFrom(ElementSize size)
+        {
+            switch (size)
+            {
+                case ElementSize.Small:
+                    return "sm";
+                case ElementSize.Large:
+                    return "lg";
+                case ElementSize.Extra:
+                    return "xl";
                 default:
                     return "";
             }

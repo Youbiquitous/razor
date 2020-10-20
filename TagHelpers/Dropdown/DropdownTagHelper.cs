@@ -37,6 +37,11 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Dropdown
         public string Text { get; set; }
 
         /// <summary>
+        /// Icon to replace the caret (if the default caret has been disabled via global CSS)
+        /// </summary>
+        public string Caret { get; set; }
+
+        /// <summary>
         /// Determines the CSS classes to be added to the A toggle item  
         /// </summary>
         public string Btn { get; set; }
@@ -62,17 +67,22 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Dropdown
             // Replace <dropdown> with <div> (maintains class/id)
             output.TagName = "div";
             output.Attributes.SetAttribute("class", "dropdown");
+            var normalized = DetermineText();
             if (!Text.IsNullOrWhitespace())
             {
-                var a = $"<a class='dropdown-toggle {btn}' href='#' role='button' id='{Id}' data-toggle='dropdown' aria-haspopup='true'>";
+                var a = $"<a class='dropdown-toggle {btn} {css}' href='#' role='button' id='{Id}' data-toggle='dropdown'>";
                 output.Content.AppendHtml(a);
-                output.Content.AppendHtml(Text);
+                output.Content.AppendHtml(normalized);
                 output.Content.AppendHtml("</a>");
+            }
+            else
+            {
+
             }
 
             // Begin of menu rendering
             var refId = $"{Id}-menu";
-            var menuDiv = $"<div class='dropdown-menu py-0 {css} {rightmost}' id='{refId}' aria-labelledby='{refId}' style='{style}'>";
+            var menuDiv = $"<div class='dropdown-menu py-0 {rightmost}' id='{refId}' aria-labelledby='{refId}' style='{style}'>";
             output.Content.AppendHtml(menuDiv);
 
             if (!css.IsNullOrWhitespace())
@@ -85,6 +95,25 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Dropdown
             if (!internalMarkup.IsNullOrWhitespace())
                 output.Content.AppendHtml(internalMarkup);
             output.Content.AppendHtml("</div>");
+        }
+
+        /// <summary>
+        /// Recognizes special stuff in the text
+        /// $$icon
+        /// </summary>
+        /// <returns></returns>
+        private string DetermineText()
+        {
+            var normalized = Text ?? "";
+            if (normalized.StartsWith("$$"))
+            {
+                normalized = normalized.Replace("$$", "");
+                normalized = $"<i class='fal {normalized}'></i>";
+            }
+
+            if (!Caret.IsNullOrWhitespace())
+                normalized = $"{normalized} <i class='{Caret} ml-2'></i>";
+            return normalized;
         }
     }
 }

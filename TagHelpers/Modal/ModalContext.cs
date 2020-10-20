@@ -20,5 +20,8 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal
         public string Id { get; set; }
         public bool OkButton { get; set; }
         public bool Fade { get; set; }
+        public bool Centered { get; set; }
+        public bool Scrollable { get; set; }
+        public ElementSize Size { get; set; }
     }
 }
