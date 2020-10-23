@@ -16,5 +16,6 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Panel
         public string Id { get; set; }
         public bool Collapsable { get; set; }
         public CollapseStatus CollapseStatus { get; set; }
+        public string Icon { get; set; }
     }
 }

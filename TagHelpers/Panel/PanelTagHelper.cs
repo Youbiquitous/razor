@@ -21,6 +21,11 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Panel
         }
 
         /// <summary>
+        /// The icon on the title
+        /// </summary>
+        public string Icon { get; set; }
+
+        /// <summary>
         /// Whether the panel has collapsible content
         /// </summary>
         public bool Collapsable { get; set; }
@@ -46,7 +51,8 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Panel
             {
                 Id = id,
                 Collapsable = Collapsable,
-                CollapseStatus = CollapseStatus
+                CollapseStatus = CollapseStatus,
+                Icon = Icon
             };
             context.Items[typeof(PanelContext)] = panelContext;
 

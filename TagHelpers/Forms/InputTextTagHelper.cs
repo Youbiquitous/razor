@@ -1,11 +1,7 @@
 ﻿using Expoware.Youbiquitous.Core.Extensions;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace TagHelperTest.Common.TagHelpers.InputText
+namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Forms
 {
     /// <summary>
     /// Razor tag helper for element INPUT TEXT

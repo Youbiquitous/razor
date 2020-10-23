@@ -23,5 +23,6 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal
         public bool Centered { get; set; }
         public bool Scrollable { get; set; }
         public ElementSize Size { get; set; }
+        public bool Dismissable { get; set; }
     }
 }

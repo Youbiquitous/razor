@@ -42,6 +42,11 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal
             output.Attributes.SetAttribute("role", "dialog");
             output.Attributes.SetAttribute("aria-labelledby", $"{modalContext.Id}-header");
             output.Attributes.SetAttribute("aria-hidden", "true");
+            if (!modalContext.Dismissable)
+            {
+                output.Attributes.SetAttribute("data-keyboard", "false");
+                //output.Attributes.SetAttribute("data-backdrop", "static");
+            }
 
             var centered = modalContext.Centered ?"modal-dialog-centered" :"";
             var scrollable = modalContext.Scrollable ? "modal-dialog-scrollable" : "";

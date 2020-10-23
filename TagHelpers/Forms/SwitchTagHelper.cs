@@ -10,7 +10,7 @@
 using Expoware.Youbiquitous.Core.Extensions;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace Crionet.LiveR.Corinto.App.Common.Razor.Forms
+namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Forms
 {
     /// <summary>
     /// Razor tag helper for element SWITCH

@@ -8,12 +8,12 @@
 
 
 using System;
+using System.Drawing;
 using System.Threading.Tasks;
-using Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Panel;
 using Expoware.Youbiquitous.Core.Extensions;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers
+namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Panel
 {
     [HtmlTargetElement("header", ParentTag = "panel")]
     [HtmlTargetElement("title", ParentTag = "header")]
@@ -61,6 +61,8 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers
                 output.TagName = "h6";
                 output.Attributes.SetAttribute("class", "p-0 m-0 font-weight-bold text-primary");
                 output.Content.Clear();
+                if (!panelContext.Icon.IsNullOrWhitespace())
+                    body = $"<i class='{panelContext.Icon} mr-2'></i>" + body;
                 output.Content.AppendHtml(body); 
             }
 

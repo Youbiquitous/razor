@@ -21,12 +21,13 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal
             Size = ElementSize.Auto;
             Scrollable = true;
             Centered = false;
+            Dismissable = true;
         }
 
-        ///// <summary>
-        ///// Id of the element (probably useless)
-        ///// </summary>
-        //public string Id { get; set; }
+        /// <summary>
+        /// Whether it can be dismissed (if false, no X button on top)
+        /// </summary>
+        public bool Dismissable { get; set; }
 
         /// <summary>
         /// Whether to add an OK button

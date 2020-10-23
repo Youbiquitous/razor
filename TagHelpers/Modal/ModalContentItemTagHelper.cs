@@ -47,7 +47,8 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Modal
                 output.Content.AppendHtml("<h5 class='modal-title' id='" + titleId + "'>");
                 output.Content.AppendHtml(body);
                 output.Content.AppendHtml("</h5>");
-                output.Content.AppendHtml(button);
+                if (modalContext.Dismissable)
+                    output.Content.AppendHtml(button);
             }
 
             // Add OK button by default

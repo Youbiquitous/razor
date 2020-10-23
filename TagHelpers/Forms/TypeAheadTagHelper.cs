@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿///////////////////////////////////////////////////////////////////
+//
+// Live-R Corinto: Tournament manager app
+// Copyright (c) Crionet 2020-2026
+//
+// Author: Dino Esposito (http://youbiquitous.net)
+//
 
-namespace OfficialsTypeAhead.Common.TagHelpers
+using Microsoft.AspNetCore.Razor.TagHelpers;
+
+namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Forms
 {
     /// <summary>
     /// Razor tag helper for Type Ahead in input form
     /// </summary>
-    [HtmlTargetElement("tah")]
+    [HtmlTargetElement("typeahead")]
     public class TypeAheadTagHelper : TagHelper
     {
         /// <summary>
@@ -33,7 +37,7 @@ namespace OfficialsTypeAhead.Common.TagHelpers
             string placeholder = output.Attributes["placeholder"]?.Value.ToString();
             string debug = Debug == true ? "text" : "hidden";
             string firstInput = $"<input type=\"text\" class=\"{css}\" id=\"{id}\" name=\"{name}\" placeholder=\"{placeholder}\">";
-            string secondInput = $"<input type=\"{debug}\" id=\"{id}-id\" name=\"{name}Id\" />";
+            string secondInput = $"<input type=\"{debug}\" id=\"{id}-id\" name=\"{name}ID\" />";
             string script = "<script> new TypeAheadContainer(" + "{" + $"targetSelector: \"#{id}\",buddySelector: \"#{id}-id\",maxNumberOfHints: {MaxHints},hintUrl: Ybq.fromServer(\"{Url}\")" + "}" + ").attach();</script>";
             output.TagName = "div";
             output.Content.AppendHtml(firstInput);
