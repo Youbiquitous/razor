@@ -37,6 +37,11 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Dropdown
         public string Text { get; set; }
 
         /// <summary>
+        /// Icon 
+        /// </summary>
+        public string Icon { get; set; }
+
+        /// <summary>
         /// Icon to replace the caret (if the default caret has been disabled via global CSS)
         /// </summary>
         public string Caret { get; set; }
@@ -72,6 +77,8 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Dropdown
             {
                 var a = $"<a class='dropdown-toggle {btn} {css}' href='#' role='button' id='{Id}' data-toggle='dropdown'>";
                 output.Content.AppendHtml(a);
+                if (!Icon.IsNullOrWhitespace())
+                    output.Content.AppendHtml($"<i class='{Icon} mr-2'></i>");
                 output.Content.AppendHtml(normalized);
                 output.Content.AppendHtml("</a>");
             }
