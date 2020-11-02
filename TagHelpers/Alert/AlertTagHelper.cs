@@ -7,6 +7,7 @@
 //
 
 
+using System;
 using System.Threading.Tasks;
 using Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Common;
 using Expoware.Youbiquitous.Core.Extensions;
@@ -79,7 +80,6 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Alert
             var content = (await output.GetChildContentAsync()).GetContent();
             if (content.IsNullOrWhitespace())
                 content = ComposeTitleAndText();
-
             if (Padding == PaddingStyle.Thin)
                 Dismiss = Dismiss.HasFlag(DismissMode.Button)
                     ? DismissMode.ClickInside
@@ -97,13 +97,16 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Alert
                 ? $"this.style.display = 'none';"
                 : "";
             
+
             // Write out
             output.TagName = "div";
             output.Attributes.SetAttribute("class", $"alert {alertTypeClass} {dismissible} {fade} {paddingStyle} {css}".TrimEnd());
             output.Attributes.SetAttribute("onclick", dismissibleClickHandler);
             output.Attributes.SetAttribute("role", "alert");
+            output.Content.Clear();
             output.Content.AppendHtml($"{content}{dismissibleButton}");
             output.TagMode = TagMode.StartTagAndEndTag;
+            
         }
 
         /// <summary>
@@ -112,7 +115,7 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Alert
         /// <returns></returns>
         private string ComposeTitleAndText()
         {
-            var title = Title.IsNullOrWhitespace() ? "" : $"<strong class='mr-2'>{Title}</strong>";
+            var title = Title.IsNullOrWhitespace() ? "" : $"<i class=\"{Icon}\"></i>&nbsp;<strong class='mr-2'>{Title}</strong>";
 
             // Side by side
             if (TitlePosition == TitlePosition.Default)
