@@ -16,9 +16,9 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.NotifyIcon
     /// Razor tag helper for element NOTIFYICON
     /// </summary>
     [HtmlTargetElement("notifyicon")]
-    public class NotifyIconTagHelper : TagHelper
+    public class ToastTagHelper : TagHelper
     {
-        public NotifyIconTagHelper()
+        public ToastTagHelper()
         {
             BadgeClass = "badge-primary";
             Icon = "fa-bell";

@@ -32,10 +32,15 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Markup
         /// </summary>
         public bool HideOnError { get; set; }
 
+        /// <summary>
+        /// Internal HTML factory
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="output"></param>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            string src = output.Attributes["src"]?.Value.ToString();
-            string onerror = "";
+            var src = output.Attributes["src"]?.Value.ToString();
+            var onerror = "";
             if (!string.IsNullOrEmpty(Fallback))
             {
                 var varText = "this.style=\"display:none\";";
