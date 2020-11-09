@@ -7,6 +7,7 @@
 //
 
 
+using System.Text;
 using System.Threading.Tasks;
 using Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Common;
 using Expoware.Youbiquitous.Core.Extensions;
@@ -97,12 +98,23 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Alert
                 ? $"this.style.display = 'none';"
                 : "";
             
-            // Write out
+            // Do we have an icon set?
+            var actualContent = $"{content}{dismissibleButton}";
+            if (!Icon.IsNullOrWhitespace())
+            {
+                var builder = new StringBuilder();
+                builder.Append("<div class='d-flex flex-row align-items-center'>");
+                builder.Append($"<div class='p-1 mr-2'><i class='{Icon}'></i></div>");
+                builder.Append($"<div>{content}{dismissibleButton}</div></div>");
+                actualContent = builder.ToString();
+            }
+
+            // Write out (without icon)
             output.TagName = "div";
             output.Attributes.SetAttribute("class", $"alert {alertTypeClass} {dismissible} {fade} {paddingStyle} {css}".TrimEnd());
             output.Attributes.SetAttribute("onclick", dismissibleClickHandler);
             output.Attributes.SetAttribute("role", "alert");
-            output.Content.AppendHtml($"{content}{dismissibleButton}");
+            output.Content.AppendHtml(actualContent);
             output.TagMode = TagMode.StartTagAndEndTag;
         }
 

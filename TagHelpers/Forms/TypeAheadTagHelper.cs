@@ -68,6 +68,7 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Forms
             var script = "<script> new TypeAheadContainer({" + 
                             $"targetSelector: '#{id}',buddySelector: '#{id}-id',maxNumberOfHints: {MaxHints}, {autoPost} hintUrl: Ybq.fromServer('{Url}')" + 
                             "}).attach();</script>";
+            
             output.TagName = "div";
             output.Content.AppendHtml(firstInput);
             output.Content.AppendHtml(secondInput);

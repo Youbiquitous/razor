@@ -7,6 +7,7 @@
 //
 
 
+using System.Threading.Tasks;
 using Crionet.LiveR.Corinto.DomainModel.Utils.Extensions;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -43,19 +44,23 @@ namespace Crionet.LiveR.Corinto.App.Common.Razor.TagHelpers.Markup
         /// </summary>
         /// <param name="context">Custom markup tree</param>
         /// <param name="output">HTML final tree</param>
-        public override void Process(TagHelperContext context, TagHelperOutput output)
+        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             // Replace <upper> with <SPAN> or <DIV> 
             output.TagName = Inline ?"span" :"div";
             output.TagMode = TagMode.StartTagAndEndTag;
 
-            var style = output.Attributes["style"]?.Value.ToString();
+            var content = (await output.GetChildContentAsync()).GetContent();
+            if (content.IsNullOrWhitespace())
+                content = Value;
+
+            //var style = output.Attributes["style"]?.Value.ToString();
             var css = output.Attributes["class"]?.Value.ToString();
 
             output.Attributes.SetAttribute("class", $"text-uppercase {css}");
             output.Attributes.SetAttribute("id", Id);
             if (Value.IsNullOrWhitespace())
-                output.Content.AppendHtml(Value);
+                output.Content.AppendHtml(content);
         }
     }
 }
